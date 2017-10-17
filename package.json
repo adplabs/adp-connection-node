@@ -1,6 +1,6 @@
 {
   "name": "adp-connection",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "ADP Connection Library",
   "main": "index.js",
   "scripts": {
