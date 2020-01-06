@@ -1,5 +1,5 @@
 'use strict';
-require('chai').should();
+var should = require('chai').should();
 var ADPConnection = require('../../lib/adpConnection');
 var mockServer = require('../lib/mockServer');
 var connectOpts = {
@@ -16,6 +16,7 @@ var connectOpts = {
 var validUrl = require('valid-url');
 var connection;
 var reconnectionObj;
+var ConfigurationException = require('adp-core').configurationException;
 
 describe('ADPConnection Tests - clean tests:', function describeCb(){
 
@@ -80,6 +81,28 @@ describe('ADPConnection Tests - clean tests:', function describeCb(){
 			} else {
 				'Reconnect is successful'.should.equal('Reconnect is successful');
 			}
+			done();
+		});
+	});
+
+	it('Accepts reconnection that has not expired', function itCb(done) {
+		const comingSoon = new Date((new Date()).getTime() + 60000);
+		reconnectionObj = connection.getReconnectionObject();
+		reconnectionObj.tokenExpiration = comingSoon.toISOString();
+
+		connection.reconnect(reconnectionObj, function reconnectCb(err) {
+			should.not.exist(err);
+			done();
+		});
+	});
+
+	it('Rejects expired reconnection', function itCb(done) {
+		const justPast = new Date((new Date()).getTime() - 60000);
+		reconnectionObj = connection.getReconnectionObject();
+		reconnectionObj.tokenExpiration = justPast.toISOString();
+
+		connection.reconnect(reconnectionObj, function reconnectCb(err) {
+			(err instanceof ConfigurationException).should.equal(true);
 			done();
 		});
 	});
