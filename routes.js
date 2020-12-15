@@ -30,9 +30,9 @@ router.get('/callback', function callback(req, res){
 		sslCertPath: 'iatCerts/apiclient_iat.pem',
 		callbackUrl: 'http://localhost:8889/callback',
 		granttype: 'authorization_code',
-		apiUrl: 'https://iat-api.adp.com',
-		tokenUrl: 'https://iat-api.adp.com/auth/oauth/v2/token',
-		authorizationUrl: 'https://iat-accounts.adp.com/auth/oauth/v2/authorize',
+		apiUrl: 'https://api.adp.com',
+		tokenUrl: 'https://api.adp.com/auth/oauth/v2/token',
+		authorizationUrl: 'https://accounts.adp.com/auth/oauth/v2/authorize',
 		authorizationCode: req.query.code
 	};
 
@@ -56,9 +56,9 @@ router.get('/authenticate', function login(req, res) {
 		sslCertPath: 'iatCerts/iat.pem',
 		granttype: 'authorization_code',
 		callbackUrl: 'http://localhost:8889/callback',
-		apiUrl: 'https://iat-api.adp.com',
-		tokenUrl: 'https://iat-api.adp.com/auth/oauth/v2/token',
-		authorizationUrl: 'https://iat-accounts.adp.com/auth/oauth/v2/authorize'
+		apiUrl: 'https://api.adp.com',
+		tokenUrl: 'https://api.adp.com/auth/oauth/v2/token',
+		authorizationUrl: 'https://accounts.adp.com/auth/oauth/v2/authorize'
 	};
 	var conn = adpConnection.createConnection(connectionOpts);
 	var url = conn.getAuthorizationRequest();
