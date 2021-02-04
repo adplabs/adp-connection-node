@@ -17,9 +17,7 @@
   "dependencies": {
     "adp-core": "^1.0.0",
     "config": "^1.19.0",
-    "mongoose": "^4.3.7",
     "node-uuid": "^1.4.7",
-    "request": "^2.67.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
